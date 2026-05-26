@@ -1,0 +1,55 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Sign Up
+  link(rel='stylesheet' href='/css/signup.css')
+body
+  .signup-container
+    h2 Signup
+    if error
+      .error-message= error
+    if success 
+      .success-message
+        | #{success}
+        a(href='/login')- Login
+    // This is a form
+    form(action='/signup' method='post' id='signupForm' novalidate)
+      .form-group
+        input(type='text' name='fullname' placeholder='Full Name' required='')
+      .form-group
+        input(type='email' name='email' placeholder='Email' required='')
+      .form-group
+        input(type='text' name='phonenumber' placeholder='Phone Number' required='' pattern='^\+256[0-9]{9}$' inputmode='numeric' title='Enter a valid Ugandan number starting with +256')
+      .form-group
+        input(type='password' name='password' placeholder='Password' required='')
+      .form-group
+        input(type='password' name='confirmpassword' placeholder='Confirm Password' required='')
+      button.signup-btn SIGNUP
+      .extra
+        p  Have an account? 
+          a(href='/login') -Login
+
+  script.
+    console.log("Signup JS is running");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("signupForm").addEventListener("submit", function (e) {
+            const inputs = this.querySelectorAll("input, select");
+
+            let hasEmpty = false;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add("error");
+                    hasEmpty = true;
+                } else {
+                    input.classList.remove("error");
+                }
+            });
+
+            if (hasEmpty) {
+                e.preventDefault();
+            }
+        });
+    });
