@@ -1,0 +1,198 @@
+/* --- Global Settings & Colors --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f6f9;
+  color: #334155;
+  padding: 2rem;
+}
+
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Evenly spaces the top row section from the bottom table */
+}
+
+/* ==========================================================================
+   1. TOP ROW: Cards Grid & Form Side-by-Side
+   ========================================================================== */
+.top-section {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Cards take slightly more space than the form */
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* 4-Cards Grid inside the top-left section */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Arranges cards in a neat 2x2 grid */
+  gap: 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); */
+  /* border-left: 5px solid #e2e8f0; */
+}
+
+.card h3 {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.card-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   2. MIDDLE ROW WIDGET: Add Product Form
+   ========================================================================== */
+.widget-box {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+/* Compact internal grid layout for inputs */
+.dashboard-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Arranges input inputs in 2 columns */
+  gap: 0.75rem;
+}
+
+.dashboard-form .form-group input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  /* border-radius: 6px; */
+  outline: none;
+  background-color: #f8fafc;
+  font-size: 0.9rem;
+}
+
+.dashboard-form .form-group input:focus {
+  border-color: #3b82f6;
+  background-color: #fff;
+}
+
+/* Form Action Buttons Configuration */
+.btn-submit {
+  padding: 0.65rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:nth-of-type(1) {
+  background-color: #fb923c;
+  color: #fff;
+}
+
+.btn-submit:nth-of-type(1):hover {
+  background-color: #fb923c;
+}
+
+.btn-submit:nth-of-type(2) {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.btn-submit:nth-of-type(2):hover {
+  background-color: #cbd5e1;
+}
+
+.table-section {
+  width: 100%;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.dashboard-table th {
+  background-color: black;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.dashboard-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.dashboard-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* This guarantees the border stays red even when the user clicks inside the input */
+input.error, select.error,
+input.error:focus, select.error:focus {
+    border: 2px solid red !important;
+}
+
+.success-message {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.text-success {
+  color: #10b981; /* green */
+}
+
+@media (max-width: 1024px) {
+  .top-section {
+    grid-template-columns: 1fr; /* Stacks the form under the cards on tablets/phones */
+  }
+  
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

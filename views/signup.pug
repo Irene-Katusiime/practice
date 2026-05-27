@@ -12,7 +12,7 @@ body
     if success 
       .success-message
         | #{success}
-        a(href='/login')- Login
+        a.success-link(href='/login') - Login
     // This is a form
     form(action='/signup' method='post' id='signupForm' novalidate)
       .form-group

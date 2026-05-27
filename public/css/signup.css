@@ -104,6 +104,13 @@ input:focus, select:focus {
     text-align: center;
     font-weight: 600;
 }
+.success-link {
+  color: white;
+}
+
+input:valid {
+  border-color: green;
+}
 
 /* This guarantees the border stays red even when the user clicks inside the input */
 input.error, select.error,

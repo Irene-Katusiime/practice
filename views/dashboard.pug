@@ -1,0 +1,86 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Products Dashboard
+  link(rel='stylesheet' href='/css/products.css')
+main.main-content
+  .top-section
+    section.cards-grid
+      .card.card-blue
+        h3 Sales
+        p.card-number UGX 50,000,000
+        span.card-trend.text-success 
+      .card.card-green
+        h3 Orders
+        p.card-number UGX 15,000,000
+        span.card-trend.text-success 
+      .card.card-orange
+        h3 In stock
+        p.card-number.text-success UGX #{Number(totalStockValue || 0).toLocaleString()}
+        span.card-trend.text-success 
+      .card.card-red
+        h3 Out of stock
+        p.card-number 5
+        span.card-trend.text-danger
+    section.widget-box.form-section
+      h2 Add Product
+      if success 
+        .success-message #{success}
+      if error 
+        .error-message=error
+      form.dashboard-form(action='/add-product' method='post' id='productForm' novalidate)
+        .form-group
+          input#recordName(type='text' placeholder='Product Name' name='productname' required='')
+        .form-group
+          input#recordCategory(type='text' placeholder='Category' name='category' required='')
+        .form-group
+          input#recordPrice(type='number' placeholder='Price' name='price' required='')
+        .form-group
+          input#recordQuantity(type='number' placeholder='Quantity' name='quantity' required='')
+        .form-group
+          input#recordColor(type='text' placeholder='Color' name='color' required='')
+        button.btn-submit(type='submit') Save
+        button.btn-submit(type='reset') Clear
+
+      script.
+        console.log("Product Form JS is running");
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("productForm").addEventListener("submit", function (e) {
+                const inputs = this.querySelectorAll("input");
+
+                let hasEmpty = false;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add("error");
+                        hasEmpty = true;
+                    } else {
+                        input.classList.remove("error");
+                    }
+                });
+
+                if (hasEmpty) {
+                    e.preventDefault();
+                }
+            });
+        });
+    section.widget-box.table-section
+      .table-responsive
+        table.dashboard-table
+          thead
+            tr
+              th ID
+              th NAME
+              th CATEGORY
+              th PRICE(UGX)
+              th QUANTITY
+          tbody
+            each product, index in products
+              tr
+                td= index + 1
+                td= product.productname
+                td= product.category
+                td= product.price
+                td= product.quantity

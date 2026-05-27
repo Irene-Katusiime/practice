@@ -4,6 +4,7 @@ const passport = require('passport');
 
 //Importing a model
 const Signup = require("../models/Signup");
+const Product = require("../models/Product");
 
 //Signup route
 router.get("/signup",async(req, res) => {
@@ -60,7 +61,7 @@ router.post("/signup",async (req, res) => {
     console.log("User registered successfully");
 
         
-    return res.render("/signup?success=Account created successfully!");
+    return res.redirect("/signup?success=Account created successfully!-Login");
 
   } catch (error) {
     console.error(error);
@@ -73,26 +74,70 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.post("/login",passport.authenticate('local',{failureRedirect:'/login'}), (req, res) => {
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    console.log("ERR:", err);
+    // console.log("USER:", user);
+    // console.log("INFO:", info);
 
+    if (err) return next(err);
+    if (!user) return res.redirect('/login');
+
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      return res.redirect('/successful');
+    });
+  })(req, res, next);
 });
 
+router.get('/successful', (req, res) => {
+  res.render('success');
+});
 
+router.get("/dashboard", async (req, res) => {
 
-// //Logout route
-// router.get("/logout", (req, res) => {
-//   req.logout((err)=>{
-//     if(err){
-//       return next(err);
-//     }
-//     res.redirect('/')
-//   });
-// });
+  const products = await Product.find();
 
-// //Index route
-// router.get('/', (req,res)=>{
-//     res.render('index')
-// });
+  let totalStockValue = 0;
+  
+  products.forEach(product => {
+    totalStockValue += Number(product.quantity || 0) * Number(product.price || 0);
+  });
+
+console.log("TOTAL STOCK VALUE:", totalStockValue);
+console.log("PRODUCTS:", products);
+
+  res.render("dashboard", {
+    products: products,
+    success: req.query.success,
+    error: req.query.error,
+    totalStockValue
+  });
+});
+
+router.post("/add-product", async (req, res) => {
+
+  try {
+
+    const newProduct = new Product({
+      productname: req.body.productname,
+      category: req.body.category,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      color: req.body.color
+    });
+
+    await newProduct.save();
+
+    res.redirect("/dashboard?success=Product has been added successfully!");
+
+  } catch (error) {
+    console.log(error);
+
+    res.redirect('/dashboard?error=Failed to add product');
+  }
+
+});
 
 
 module.exports = router;

@@ -4,6 +4,7 @@
  const path  = require('path')
  const mongoose = require('mongoose');
  const passport = require('passport');
+ const LocalStrategy = require('passport-local').Strategy;
  const MongoStore = require('connect-mongo').default;
 
 
@@ -58,7 +59,7 @@ app.use((req,res,next)=>{
 
 //5.Routes
 app.use('/',require('./routes/authRoutes'))
-// app.use('/',require('./routes/dashboardRoutes'))
+app.use('/',require('./routes/dashboardRoutes'))
 
 //This is the second last chunk of code
 //Handling non-existing routes
