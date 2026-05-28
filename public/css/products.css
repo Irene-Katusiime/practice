@@ -20,9 +20,6 @@ body {
   gap: 2rem; /* Evenly spaces the top row section from the bottom table */
 }
 
-/* ==========================================================================
-   1. TOP ROW: Cards Grid & Form Side-by-Side
-   ========================================================================== */
 .top-section {
   display: grid;
   grid-template-columns: 1.2fr 1fr; /* Cards take slightly more space than the form */
@@ -58,9 +55,6 @@ body {
   color: #0f172a;
 }
 
-/* ==========================================================================
-   2. MIDDLE ROW WIDGET: Add Product Form
-   ========================================================================== */
 .widget-box {
   background-color: #fff;
   padding: 1.5rem;
@@ -77,7 +71,7 @@ body {
 /* Compact internal grid layout for inputs */
 .dashboard-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Arranges input inputs in 2 columns */
+  /* grid-template-columns: repeat(2, 1fr); Arranges input inputs in 2 columns */
   gap: 0.75rem;
 }
 
@@ -125,8 +119,17 @@ body {
   background-color: #cbd5e1;
 }
 
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons .btn-submit {
+  flex: 1;
+}
+
 .table-section {
-  width: 100%;
+  width: 150%;
 }
 
 .table-responsive {

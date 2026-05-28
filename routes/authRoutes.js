@@ -60,8 +60,8 @@ router.post("/signup",async (req, res) => {
 
     console.log("User registered successfully");
 
-        
-    return res.redirect("/signup?success=Account created successfully!-Login");
+    // return res.redirect("/signup?success=Account created successfully!");
+    return res.render("signup", { success: "Account created successfully!" });
 
   } catch (error) {
     console.error(error);

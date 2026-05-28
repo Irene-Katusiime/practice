@@ -11,8 +11,8 @@ body
       .error-message= error
     if success 
       .success-message
-        | #{success}
-        a.success-link(href='/login') - Login
+        | #{success} 
+        a.success-link(href='/login') Login
     // This is a form
     form(action='/signup' method='post' id='signupForm' novalidate)
       .form-group

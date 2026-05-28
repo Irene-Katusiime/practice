@@ -35,13 +35,14 @@ main.main-content
         .form-group
           input#recordCategory(type='text' placeholder='Category' name='category' required='')
         .form-group
-          input#recordPrice(type='number' placeholder='Price' name='price' required='')
+          input#recordPrice(type='text' placeholder='Price' name='price' required='')
         .form-group
-          input#recordQuantity(type='number' placeholder='Quantity' name='quantity' required='')
+          input#recordQuantity(type='text' placeholder='Quantity' name='quantity' required='')
         .form-group
           input#recordColor(type='text' placeholder='Color' name='color' required='')
-        button.btn-submit(type='submit') Save
-        button.btn-submit(type='reset') Clear
+        .form-group.buttons
+          button.btn-submit(type='submit') Save
+          button.btn-submit(type='reset') Clear
 
       script.
         console.log("Product Form JS is running");
@@ -79,7 +80,7 @@ main.main-content
           tbody
             each product, index in products
               tr
-                td= index + 1
+                td= '#' + product.id
                 td= product.productname
                 td= product.category
                 td= product.price
